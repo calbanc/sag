@@ -64,7 +64,7 @@ export default class MainComponent implements OnInit{
     {
       icon: 'pi pi-file-excel',
       tooltip: 'EXPORTAR',
-      command: () => this.exportarExcel(this.dt)
+      command: () => this.exportarExcel()
     },
     
   ];
@@ -229,9 +229,18 @@ export default class MainComponent implements OnInit{
     }
   }
 
-  exportarExcel(dt: Table) {
-    // Usa lo filtrado si existe; si no, usa todo:
-    const rows = (dt.filteredValue ?? dt.value ?? []) as any[];
+  exportarExcel() {
+    if (!this.dt) {
+      console.error('No se pudo acceder a la tabla');
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'No se pudo acceder a los datos de la tabla'
+      });
+      return;
+    }
+    
+    const rows = (this.dt.filteredValue || this.dt.value || []) as any[];
 
     // Mapea a columnas legibles y añade la columna calculada:
     const hoja = rows.map((c) => ({
@@ -250,6 +259,7 @@ export default class MainComponent implements OnInit{
     const ws = XLSX.utils.json_to_sheet(hoja);
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Reporte');
+    
 
     // Escribe y descarga:
     const bin = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });

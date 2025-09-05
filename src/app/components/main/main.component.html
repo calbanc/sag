@@ -41,10 +41,12 @@
 
 
   
-<p-table
-    [value]="data "
+<p-table #dt
+    [value]="data" stripedRows
     [scrollable]="true" scrollHeight="400px" [tableStyle]="{'min-width': '50rem'}"
 >
+
+
     <ng-template #header>
         <tr>
             <th style="width:10%">Fecha</th>
@@ -75,18 +77,19 @@
           </td> 
         </tr>
     </ng-template>
-  
-    <ng-template #paginatorright>
-      <p-button
-      label="Exportar Excel (todo)"
-      icon="pi pi-file-excel"
-      (onClick)="exportarExcel(dt)"
-      styleClass="p-button-success"
-    ></p-button>
+    <ng-template #caption>
+      <div class="flex">
+        <p-button
+        label="Exportar Excel (todo)"
+        icon="pi pi-file-excel"
+        (onClick)="exportarExcel()"
+        styleClass="p-button-success"
+      ></p-button>
+      </div>
     </ng-template>
+  
+   
 </p-table>
-
-
 </div>
 
 <!-- Speed Dial -->
