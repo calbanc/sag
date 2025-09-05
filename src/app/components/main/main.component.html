@@ -1,0 +1,164 @@
+<p-toolbar>
+  <ng-template pTemplate="left">
+    <div class="toolbar-title">
+      <h2>RUT: {{ username }}</h2>
+    </div>
+  </ng-template>
+  
+  <ng-template pTemplate="right">
+    
+         
+         <p-button
+         (click)="onLogout()"
+         icon="pi pi-sign-out"
+          [rounded]="true" 
+          [text]="true" 
+          [raised]="true" 
+          severity="info" />
+
+  </ng-template>
+</p-toolbar>
+
+<div class="main-content">
+  <div class="selector-container">
+    <div class="date-selector">
+      <label for="monthSelect">Seleccionar Mes y Año:</label>
+      <input
+        type="month"
+        id="monthSelect"
+        [(ngModel)]="selectedMonth"
+        class="month-input"
+        placeholder="Selecciona mes y año">
+    </div>
+    
+    <div class="button-container">
+      <p-button
+        label="Mostrar"
+        icon="pi pi-eye"
+        (click)="onShow()"
+        [disabled]="!selectedMonth"
+        styleClass="p-button-primary">
+      </p-button>
+    </div>
+  </div>
+</div>
+
+<!-- Speed Dial -->
+<p-speedDial 
+  [model]="speedDialItems" 
+  direction="up" 
+  [style]="{bottom: '20px', right: '20px'}"
+  buttonStyleClass="p-button-danger"
+  buttonIcon="pi pi-bars">
+</p-speedDial>
+
+<!-- Bottom Sheet -->
+<div class="bottom-sheet-overlay" [class.active]="showBottomSheet" (click)="onCloseBottomSheet()">
+  <div class="bottom-sheet" [class.active]="showBottomSheet" (click)="$event.stopPropagation()">
+    <div class="bottom-sheet-header">
+      <h3>Agregar Nuevo Elemento</h3>
+      <button class="close-btn" (click)="onCloseBottomSheet()">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+    
+    <div class="bottom-sheet-content">
+      <div class="form-group">
+        <label for="dateField">Fecha:</label>
+        <input
+          type="date"
+          id="dateField"
+          [(ngModel)]="formData.selectedDate"
+          class="form-input">
+      </div>
+      
+      <div class="form-group">
+        <label for="sps">SPS:</label>
+        <input
+          type="text"
+          id="sps"
+          [(ngModel)]="formData.sps"
+          class="form-input"
+          placeholder="Ingresa SPS">
+      </div>
+      
+      <div class="form-group">
+        <label for="programa">Programa:</label>
+        <p-select
+          id="programa"
+          [(ngModel)]="formData.programa"
+          [options]="programaOptions"
+          optionLabel="name"
+          optionValue="code"
+          placeholder="Selecciona un programa"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true">
+        </p-select>
+      </div>
+      
+      <div class="form-group">
+        <label for="actividad">Actividades:</label>
+        <p-select
+          id="actividad"
+          [(ngModel)]="formData.actividad"
+          [options]="actividadOptions"
+          optionLabel="name"
+          optionValue="code"
+          placeholder="Selecciona una actividad"
+          [filter]="true"
+          filterBy="name"
+          [showClear]="true">
+        </p-select>
+      </div>
+      
+      <div class="form-group">
+        <label for="horaInicio">Hora Inicio:</label>
+        <input
+          type="time"
+          id="horaInicio"
+          [(ngModel)]="formData.horaInicio"
+          class="form-input">
+      </div>
+      
+      <div class="form-group">
+        <label for="horaTermino">Hora Término:</label>
+        <input
+          type="time"
+          id="horaTermino"
+          [(ngModel)]="formData.horaTermino"
+          class="form-input">
+      </div>
+      
+      <div class="form-group">
+        <label for="auto">Auto:</label>
+        <p-toggleButton
+          [(ngModel)]="formData.auto"
+          onLabel="Sí"
+          offLabel="No"
+          styleClass="w-full">
+        </p-toggleButton>
+      </div>
+      
+      <div class="form-group">
+        <label for="observation">Observación:</label>
+        <textarea
+          id="observation"
+          [(ngModel)]="formData.observation"
+          class="form-textarea"
+          placeholder="Ingresa tus observaciones aquí"
+          rows="4">
+        </textarea>
+      </div>
+    </div>
+    
+    <div class="bottom-sheet-footer">
+      <button class="btn-cancel" (click)="onCloseBottomSheet()">
+        Cancelar
+      </button>
+      <button class="btn-save" (click)="onSaveForm()">
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>

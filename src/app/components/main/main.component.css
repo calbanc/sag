@@ -1,0 +1,459 @@
+.toolbar-title h2 {
+  margin: 0;
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.main-content {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: calc(100vh - 64px);
+}
+
+.main-content h3 {
+  color: #495057;
+  margin-bottom: 16px;
+}
+
+.main-content p {
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+.selector-container {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+  margin-bottom: 30px;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  flex-wrap: wrap;
+}
+
+.date-selector {
+  flex: 1;
+  min-width: 200px;
+}
+
+.date-selector label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #495057;
+  font-size: 1rem;
+}
+
+.month-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: white;
+  transition: border-color 0.3s ease;
+}
+
+.month-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.button-container {
+  flex-shrink: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .selector-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .date-selector {
+    min-width: auto;
+  }
+  
+  .button-container {
+    width: 100%;
+  }
+  
+  .button-container p-button {
+    width: 100%;
+  }
+  
+  :host ::ng-deep .button-container .p-button {
+    width: 100%;
+  }
+}
+
+/* Estilos para el botón de salir */
+:host ::ng-deep .p-button-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+:host ::ng-deep .p-button-danger:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
+}
+
+/* Estilos para el toolbar */
+:host ::ng-deep .p-toolbar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 0;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+:host ::ng-deep .p-toolbar .toolbar-title h2 {
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Speed Dial Styles */
+:host ::ng-deep .p-speeddial {
+  position: fixed;
+  z-index: 1000;
+}
+
+:host ::ng-deep .p-speeddial-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  width: 60px !important;
+  height: 60px !important;
+  font-size: 24px !important;
+}
+
+:host ::ng-deep .p-speeddial-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+:host ::ng-deep .p-speeddial-action {
+  background: white;
+  color: #333;
+  border: 2px solid #e1e5e9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 20px !important;
+}
+
+:host ::ng-deep .p-speeddial-action:hover {
+  background: #f8f9fa;
+  border-color: #667eea;
+  transform: scale(1.05);
+}
+
+:host ::ng-deep .p-speeddial-action .p-speeddial-action-icon {
+  color: #667eea;
+}
+
+/* Bottom Sheet Styles */
+.bottom-sheet-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.bottom-sheet-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 20px 20px 0 0;
+  max-height: 80vh;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  z-index: 2001;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Force white background for all screen elements */
+.main-content {
+  background-color: white !important;
+}
+
+.bottom-sheet-content {
+  background-color: white !important;
+}
+
+.bottom-sheet.active {
+  transform: translateY(0);
+}
+
+.bottom-sheet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #e1e5e9;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20px 20px 0 0;
+}
+
+.bottom-sheet-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.bottom-sheet-content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.bottom-sheet-content .form-group {
+  margin-bottom: 2rem;
+}
+
+.bottom-sheet-content label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #495057;
+  font-size: 1rem;
+}
+
+.form-input, .form-textarea, .form-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: white;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* PrimeNG Select Styling */
+:host ::ng-deep .p-select {
+  width: 100% !important;
+}
+
+:host ::ng-deep .p-select .p-select-label {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: white;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+:host ::ng-deep .p-select .p-select-label:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+:host ::ng-deep .p-select .p-select-label:hover {
+  border-color: #667eea;
+}
+
+/* PrimeNG ToggleButton Styling */
+:host ::ng-deep .p-togglebutton {
+  width: 100% !important;
+}
+
+:host ::ng-deep .p-togglebutton .p-button {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: white;
+  color: #495057;
+  transition: all 0.3s ease;
+}
+
+:host ::ng-deep .p-togglebutton .p-button:hover {
+  border-color: #667eea;
+  background-color: #f8f9fa;
+}
+
+:host ::ng-deep .p-togglebutton .p-button.p-highlight {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+  color: white;
+}
+
+/* Custom Toggle Switch Styling */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.toggle-input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.toggle-label:hover {
+  border-color: #667eea;
+}
+
+.toggle-slider {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  background-color: #ccc;
+  border-radius: 24px;
+  transition: 0.3s;
+}
+
+.toggle-slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.toggle-input:checked + .toggle-label .toggle-slider {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.toggle-input:checked + .toggle-label .toggle-slider:before {
+  transform: translateX(26px);
+}
+
+.toggle-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.bottom-sheet-footer {
+  padding: 2rem;
+  border-top: 1px solid #e1e5e9;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.btn-cancel, .btn-save {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #5a6268;
+}
+
+.btn-save {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Dark mode disabled - removed all dark mode styles */
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .bottom-sheet {
+    max-height: 90vh;
+  }
+  
+  .bottom-sheet-footer {
+    flex-direction: column;
+  }
+  
+  .btn-cancel, .btn-save {
+    width: 100%;
+  }
+}

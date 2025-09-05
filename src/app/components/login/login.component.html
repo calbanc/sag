@@ -1,0 +1,21 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2 class="login-title">Bienvenido para ingresar digita tu rut</h2>
+    <div class="form-group">
+      <input 
+        type="text" 
+        pInputText 
+        placeholder="Ingresa tu rut" 
+        class="input-field" 
+        [(ngModel)]="username">
+    </div>
+    
+    <button 
+      pButton 
+      type="button" 
+      label="Ingresar" 
+      class="login-button"
+      (click)="onLogin()">
+    </button>
+  </div>
+</div>
